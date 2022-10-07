@@ -1,13 +1,14 @@
 <script setup></script>
 
 <template>
-  <!-- <RouterLink to="/">Home</RouterLink> -->
-  <!-- <RouterLink to="/about">About</RouterLink> -->
-
-  <RouterView />
+  <div class="container">
+    <div class="head">head</div>
+    <div class="body">body</div>
+    <div class="tears-left"></div>
+    <div class="tears-right"></div>
+  </div>
 </template>
-
-<style >
+<style>
 * {
   padding: 0;
   margin: 0;
@@ -55,6 +56,61 @@ html {
   background-position: center;
   background-size: 100vw 100vh;
 } */
+.head {
+  background-color: burlywood;
+  /* height: 20vh; */
+  border-radius: 50%;
+  bottom: 0;
+}
+.body {
+  background-color: burlywood;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.tears-left {
+  background-color: blue;
+  height: 90vh;
+  width: 10vw;
+  z-index: 20;
+}
+.tears-right {
+  background-color: blue;
+  height: 90vh;
+  width: 10vw;
+  z-index: 20;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+}
+
+.body {
+  grid-area: 3 / 2 / 6 / 6;
+}
+
+.head {
+  grid-area: 1 / 3 / 3 / 5;
+}
+
+.tears-left {
+  grid-area: 1 / 1 / 6 / 3;
+}
+
+.tears-right {
+  grid-area: 1 / 5 / 6 / 7;
+}
+
+.tears-left {
+  grid-area: tears-left;
+}
+
+.tears-right {
+  grid-area: tears-right;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
