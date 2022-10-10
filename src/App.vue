@@ -55,7 +55,7 @@ function itterateScore(id) {
   });
   let length = i;
   if (!document.querySelector("#" + id).classList.contains("active")) {
-    alert("betterluck next time");
+    alert("better luck next time");
     score = 0;
     document.querySelector("p").innerHTML = `score ${score}`;
     document.querySelectorAll("button").forEach((button) => {
