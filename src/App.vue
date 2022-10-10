@@ -1,7 +1,10 @@
 <script setup>
 let i;
+let occational = "!";
 let percentage;
-let score = [];
+let score = JSON.parse(localStorage.getItem("score"))
+  ? JSON.parse(localStorage.getItem("score"))
+  : localStorage.setItem("score", JSON.stringify());
 let fonts = [
   "Alkalami",
   "Anton",
@@ -27,10 +30,9 @@ let fonts = [
   "serif",
 ];
 function generateRandomColor() {
-  console.log("clicked");
   let letters = "0123456789ABCDEF";
   let color = "#";
-  for (i = 0; i < 8; i++) {
+  for (i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
@@ -39,33 +41,60 @@ function generateRandomPercentage() {
   percentage = Math.random() * 100 + "%";
   return percentage;
 }
-console.log(generateRandomPercentage());
+function getFont() {
+  i = Math.round(fonts.length * Math.random());
+  return fonts[i];
+}
+function generateBorderSize() {
+  i = Math.round(10 * Math.random()) + "px";
+  return i;
+}
+function itterateScore() {
+  // score++;
+  document.querySelector("p").innerHTML = `score ${score}`;
+  localStorage.setItem("score", JSON.stringify(score));
+  document.querySelectorAll("button").forEach((button) => {
+    button.style.backgroundColor = generateRandomColor();
+    button.style.color = generateRandomColor();
+    button.style.borderRadius = generateRandomPercentage();
+    button.style.borderWidth = generateBorderSize();
+    button.style.borderColor = generateRandomColor();
+    button.style.fontFamily = getFont();
+  });
+}
 </script>
 
 <template>
-  <div>
-  <div id="score" class="">
-<p>score</p>
-
-  </div>
+  <div class="w-4/5 flex flex-col items-center">
+    <div id="score" class="flex flex-row items-center">
+      <p>score</p>
+      <img src="./assets/logoFinal.ico" alt="endless mode" />
+    </div>
+    <div class="flex flex-col">
+      <button id="option1" v-on:click="itterateScore()">Download</button>
+      <button id="option2" v-on:click="itterateScore()">Download</button>
+    </div>
   </div>
   <p></p>
 </template>
 <style>
-  *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    word-wrap: break-word;
-  }
-  ::-webkit-scrollbar {
-    display:none
-  }
-  .material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48
-  }
-  </style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+img {
+  height: 16px;
+  width: 16px;
+}
+button {
+  margin: 1%;
+  padding: 1em;
+}
+</style>
