@@ -4,7 +4,7 @@ let occational = "!";
 let percentage;
 let score = JSON.parse(localStorage.getItem("score"))
   ? JSON.parse(localStorage.getItem("score"))
-  : localStorage.setItem("score", JSON.stringify());
+  : localStorage.setItem("score", JSON.stringify(0));
 let fonts = [
   "Alkalami",
   "Anton",
@@ -49,18 +49,39 @@ function generateBorderSize() {
   i = Math.round(10 * Math.random()) + "px";
   return i;
 }
-function itterateScore() {
-  // score++;
-  document.querySelector("p").innerHTML = `score ${score}`;
-  localStorage.setItem("score", JSON.stringify(score));
+function itterateScore(id) {
+  i = -1;
   document.querySelectorAll("button").forEach((button) => {
-    button.style.backgroundColor = generateRandomColor();
-    button.style.color = generateRandomColor();
-    button.style.borderRadius = generateRandomPercentage();
-    button.style.borderWidth = generateBorderSize();
-    button.style.borderColor = generateRandomColor();
-    button.style.fontFamily = getFont();
+    i++;
+    button.classList = "";
   });
+  let length = i;
+  if (document.querySelector("#" + id).classList.contains('active')) {
+    alert("betterluck next time");
+    localStorage.setItem("score", JSON.stringify(0));
+    document.querySelector("p").innerHTML = `score ${score}`;
+    document.querySelectorAll("button").forEach((button) => {
+      button.style.backgroundColor = "";
+      button.style.color = "";
+      button.style.borderRadius = "";
+      button.style.borderWidth = "";
+      button.style.borderColor = "";
+      button.style.fontFamily = "";
+    });
+  } else {
+    score++;
+    document.querySelector("p").innerHTML = `score ${score}`;
+    localStorage.setItem("score", JSON.stringify(score));
+    document.querySelectorAll("button").forEach((button) => {
+      button.style.backgroundColor = generateRandomColor();
+      button.style.color = generateRandomColor();
+      button.style.borderRadius = generateRandomPercentage();
+      button.style.borderWidth = generateBorderSize();
+      button.style.borderColor = generateRandomColor();
+      button.style.fontFamily = getFont();
+    });
+  }
+  document.querySelectorAll("button")[Math.round(length * Math.random())].classList.toggle("active");
 }
 </script>
 
@@ -71,8 +92,12 @@ function itterateScore() {
       <img src="./assets/logoFinal.ico" alt="endless mode" />
     </div>
     <div class="flex flex-col">
-      <button id="option1" v-on:click="itterateScore()">Download</button>
-      <button id="option2" v-on:click="itterateScore()">Download</button>
+      <button id="option0" v-on:click="itterateScore('option0')" class="active">
+        Download
+      </button>
+      <button id="option1" v-on:click="itterateScore('option1')">
+        Download
+      </button>
     </div>
   </div>
   <p></p>
