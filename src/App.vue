@@ -8,7 +8,6 @@ function generateRandomColor() {
   for ( i = 0; i < 8; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
-  document.querySelector('p').innerHTML=generateRandomColor()
   return color;
 }
 function generateRandomPercentage(){
