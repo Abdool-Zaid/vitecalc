@@ -1,10 +1,9 @@
 <script setup>
 let i;
-let occational = "!";
 let percentage;
 let score = JSON.parse(localStorage.getItem("score"))
   ? JSON.parse(localStorage.getItem("score"))
-  : localStorage.setItem("score", JSON.stringify(0));
+  : localStorage.setItem("score", JSON.stringify("0"));
 let fonts = [
   "Alkalami",
   "Anton",
@@ -53,12 +52,11 @@ function itterateScore(id) {
   i = -1;
   document.querySelectorAll("button").forEach((button) => {
     i++;
-    button.classList = "";
   });
   let length = i;
-  if (document.querySelector("#" + id).classList.contains('active')) {
+  if (!document.querySelector("#" + id).classList.contains("active")) {
     alert("betterluck next time");
-    localStorage.setItem("score", JSON.stringify(0));
+    score = 0;
     document.querySelector("p").innerHTML = `score ${score}`;
     document.querySelectorAll("button").forEach((button) => {
       button.style.backgroundColor = "";
@@ -68,7 +66,7 @@ function itterateScore(id) {
       button.style.borderColor = "";
       button.style.fontFamily = "";
     });
-  } else {
+  } else if (document.querySelector("#" + id).classList.contains("active")) {
     score++;
     document.querySelector("p").innerHTML = `score ${score}`;
     localStorage.setItem("score", JSON.stringify(score));
@@ -80,8 +78,12 @@ function itterateScore(id) {
       button.style.borderColor = generateRandomColor();
       button.style.fontFamily = getFont();
     });
+  } else {
+    alert("error");
   }
-  document.querySelectorAll("button")[Math.round(length * Math.random())].classList.toggle("active");
+  document
+    .querySelectorAll("button")
+    [Math.round(length * Math.random())].classList.toggle("active");
 }
 </script>
 
